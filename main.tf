@@ -29,3 +29,16 @@ resource "aws_s3_bucket_versioning" "demo" {
     status = "Enabled"
   }
 }
+
+resource "aws_s3_bucket_lifecycle_configuration" "demo" {
+  bucket = aws_s3_bucket.demo.id
+
+  rule {
+    id     = "expire-old-versions"
+    status = "Enabled"
+
+    noncurrent_version_expiration {
+      noncurrent_days = 90
+    }
+  }
+}
