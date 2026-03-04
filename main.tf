@@ -30,6 +30,19 @@ resource "aws_s3_bucket_versioning" "demo" {
   }
 }
 
+resource "aws_s3_bucket_lifecycle_configuration" "demo" {
+  bucket = aws_s3_bucket.demo.id
+
+  rule {
+    id     = "expire-old-versions"
+    status = "Enabled"
+
+    noncurrent_version_expiration {
+      noncurrent_days = 90
+    }
+  }
+}
+
 resource "aws_s3_bucket_server_side_encryption_configuration" "demo" {
   bucket = aws_s3_bucket.demo.id
 
