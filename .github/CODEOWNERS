@@ -1,0 +1,3 @@
+# Terraform files require platform team review
+*.tf @platform-team
+.github/ @platform-team
